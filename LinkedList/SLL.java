@@ -1,6 +1,10 @@
 class SLL {
     Node head = null;
     public int size;
+
+    SLL(){
+        this.size = 0;
+    }
     class Node{ 
         int data;
         Node next;
@@ -118,6 +122,35 @@ class SLL {
         
     }
 
+    public void reverse(){
+        if(head == null){
+            System.out.println("List is Empty");
+            return;
+        }
+
+        if(head.next == null){
+            return;
+        }
+
+        Node currNode = head.next;
+        Node prevNode = head;
+        Node nextNode = head.next.next;
+        
+        while(currNode.next != null){
+            currNode.next = prevNode;
+            prevNode = currNode;
+            currNode = nextNode;
+            nextNode = nextNode.next;
+        }
+
+        currNode.next = prevNode;
+
+        head.next = null;
+        head = currNode;
+
+    }
+
+
     public int getSize(){
         return size;
     }
@@ -146,6 +179,10 @@ class SLL {
         list.popInsert(2);
         list.printSLL();
         System.out.println(list.getSize());
+        list.reverse();
+        list.printSLL();
+        list.append(55);
+        list.printSLL();
 
     }
 }
