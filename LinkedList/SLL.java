@@ -55,6 +55,7 @@ class SLL {
 
         if(index>size){
             System.out.println("Invalid");
+            return;
         }
         Node newNode = new Node(data);
 
@@ -69,12 +70,57 @@ class SLL {
 
     }
 
+    public void pop(){
+        if(head == null){
+            System.out.println("List is Empty");
+            return;
+        }
+        Node curr = head;
+        size--;
+        while(curr.next.next != null){
+            curr = curr.next;
+        }
+
+        curr.next = null;
+    }
+
+    public void popFirst(){
+        if(head == null){
+            System.out.println("List is Empty");
+            return;
+        }
+        size--;
+        head = head.next;
+    }
+
+    public void popInsert(int index){
+        if(head == null){
+            System.out.println("List is Empty");
+            return;
+        }
+        if(index>size){
+            System.out.println("Invalid");
+            return;
+        }
+
+        if(index == 0){
+            head = head.next;
+            size--;
+            return;
+        }
+        
+        Node curNode = head;
+        for(int i=0;i<index-1;i++){
+            curNode = curNode.next;
+        }
+        size--;
+        curNode.next = curNode.next.next;
+        
+    }
+
     public int getSize(){
         return size;
     }
-
-
-
 
     public static void main(String[] args) {
         SLL list = new SLL();
@@ -91,5 +137,15 @@ class SLL {
         list.printSLL();
         list.insert(2, 11);
         list.printSLL();
+        System.out.println(list.getSize()); 
+        list.pop();
+        list.printSLL();
+        System.out.println(list.getSize()); 
+        list.popFirst();
+        list.printSLL();
+        list.popInsert(2);
+        list.printSLL();
+        System.out.println(list.getSize());
+
     }
 }
