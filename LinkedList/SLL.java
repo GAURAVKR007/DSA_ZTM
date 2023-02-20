@@ -150,6 +150,18 @@ class SLL {
 
     }
 
+    public Node reverseRecursion(Node head){
+        if(head == null || head.next == null){
+            return head;
+        }
+
+        Node newHead = reverseRecursion(head.next);
+        head.next.next = head;
+        head.next = null;
+
+        return newHead;
+    }
+
 
     public int getSize(){
         return size;
@@ -183,6 +195,8 @@ class SLL {
         list.printSLL();
         list.append(55);
         list.printSLL();
+        // list.head = list.reverseRecursion(list.head);
+        // list.printSLL();
 
     }
 }
