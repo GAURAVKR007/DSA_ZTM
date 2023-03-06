@@ -1,0 +1,7 @@
+A binary tree has only 2 child
+
+Search -> O(logN)
+Inset -> O(logN)
+delete -> O(logN)
+
+no of nodes = 2^h - 1;
