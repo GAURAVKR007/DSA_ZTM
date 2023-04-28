@@ -31,7 +31,23 @@ public class BST {
         return root;
     }
 
-    
+    public static boolean access(Node root, int val){
+        if(root == null) return false;
+
+        if(root.data == val) return true;
+
+        if(root.data > val) {
+            // Left Subtree
+            return access(root.left, val);
+        } else if(root.data < val) {
+            // Right Subtree
+            return access(root.right, val);
+        }
+
+        return false;
+    }
+
+   
 
     public static void inOrder(Node root) {
         if(root == null) return;
@@ -51,6 +67,10 @@ public class BST {
         inOrder(root);
         System.out.println(" ");
 
-        
+        if(access(root, 7)) {
+            System.out.println("Found");
+        }else {
+            System.out.println("Not Found");
+        }
     }
 }
