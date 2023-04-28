@@ -47,7 +47,49 @@ public class BST {
         return false;
     }
 
-   
+    public static Node delete(Node root, int val){
+        if(root.data > val) {
+            // Left Subtree
+            root.left = delete(root.left, val);
+        }
+        else if(root.data < val){
+            // Right Subtree
+            root.right = delete(root.right, val);
+        } else {
+            // root.data == val;
+
+            // CASE 1 : 
+
+            if(root.left == null && root.right == null) {
+                return null;
+            }
+
+            // CASE 2 :
+
+            if(root.left == null){
+                return root.right;
+            }else if(root.right == null){
+                return root.left;
+            }
+
+            // CASE 3:
+            
+            Node IS = inorderSuccessor(root.right);
+            root.data = IS.data;
+            root.right = delete(root.right, IS.data);
+        }
+
+        return root;
+    }
+
+
+    public static Node inorderSuccessor(Node root) {
+        while(root.left != null){
+            root = root.left;
+        }
+
+        return root;
+    }
 
     public static void inOrder(Node root) {
         if(root == null) return;
@@ -72,5 +114,9 @@ public class BST {
         }else {
             System.out.println("Not Found");
         }
+
+        delete(root, 4);
+        inOrder(root);
+        System.out.println(" ");
     }
 }
