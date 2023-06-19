@@ -38,16 +38,16 @@ public class BFS {
 
         graph[5].add(new Edge(5, 3));
         graph[5].add(new Edge(5, 4));
-        graph[5].add(new Edge(5, 6));
+        // graph[5].add(new Edge(5, 6));
 
         graph[6].add(new Edge(6, 5));
 
     }
 
-    public static void bfs(ArrayList<Edge> graph[]){
+    public static void bfs(ArrayList<Edge> graph[],int V,boolean vis[],int start){
         Queue<Integer> q = new LinkedList<>(); // Creating a Queue in Java
-        boolean vis[] = new boolean[graph.length];
-        q.add(graph[0].get(0).src);
+        
+        q.add(start);
 
         while(!q.isEmpty()) {
             int curr = q.remove();
@@ -66,7 +66,14 @@ public class BFS {
         int V = 7;
         ArrayList <Edge> graph[] = new ArrayList[V];
         createGraph(graph);
-        bfs(graph);
+
+        boolean vis[] = new boolean[graph.length];
+        for(int i=0;i<V;i++) {
+            if(vis[i] == false) {
+                bfs(graph, V, vis, i);
+            }
+        }
+
         System.out.println("");
     }
 }
